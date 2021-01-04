@@ -1,0 +1,44 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  profiles:
+    active: @environment@
+  servlet:
+    multipart:
+      enabled: true
+      #单个文件大小
+      max-file-size: 100MB
+      #一次请求的总大小
+      max-request-size: 100MB
+mybatis:
+  mapper-locations: classpath:/mapper/*.xml , classpath:/mapper/**/*.xml
+  configuration:
+    jdbc-type-for-null: 'null'
+    # 自动驼峰
+    map-underscore-to-camel-case: true
+server:
+  tomcat:
+    uri-encoding: UTF-8
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+logging:
+  pattern:
+    console: "%clr(%d{${LOG_DATEFORMAT_PATTERN:yyyy-MM-dd HH:mm:ss}}){magenta} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(%25.25logger{25}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:%wEx}"
+  level:
+    com.zfei.rehabilitation.common.mybatis.interceptor: info
+    com.zfei.rehabilitation: debug
+    org.apache.zookeeper: error
+mybatis-plus:
+  global-config:
+    db-config:
+      logic-delete-value: '1'
+      logic-not-delete-value: '0'
+      logic-delete-field: delFlag
+customize:
+  ignore-url:
+    - /login/**
+    - /demo/**
+    - /file/**
